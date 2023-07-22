@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <header>
+        <h1>Add a New Card to {{ deck.name }}</h1>
+    </header>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="question">Question:</label>
+            <textarea id="question" name="question" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="answer">Answer:</label>
+            <textarea id="answer" name="answer" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Card</button>
+        <a href="{% url 'view-deck' deck.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+{% endblock %}

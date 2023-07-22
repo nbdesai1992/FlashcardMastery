@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <header class="dashboard-header">
+        <h1>Welcome to FlashcardMastery, {{ user.username }}</h1>
+        <p>Your progress and decks at a glance.</p>
+    </header>
+
+    <section class="user-info">
+        <h2>Your Information:</h2>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <!-- More user details if needed -->
+        <a href="{% url 'logout' %}">Logout</a>
+    </section>
+
+    <section class="deck-overview">
+        <h2>Your Decks:</h2>
+        <div class="deck-list">
+            {% for deck in decks %}
+            <div class="deck-item">
+                <h3>{{ deck.name }}</h3>
+                <p>Total Flashcards: {{ deck.cards.count }}</p>
+                <p>Mastered: {{ deck.mastered_count }}</p>
+                <a href="{% url 'deck-detail' deck.id %}">View Deck</a>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="{% url 'create-deck' %}" class="btn">Create New Deck</a>
+    </section>
+
+    <footer>
+        <p>FlashcardMastery © 2023</p>
+    </footer>
+</div>
+
+{% endblock %}

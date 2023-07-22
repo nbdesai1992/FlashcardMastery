@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <header class="session-header">
+        <h1>Study Session: {{ deck.name }}</h1>
+    </header>
+
+    <section class="flashcard-display">
+        <div class="flashcard" id="currentCard">
+            <div class="card-front">
+                <p>{{ current_card.question }}</p>
+                <button id="revealAnswer">Reveal Answer</button>
+            </div>
+            <div class="card-back" style="display:none;">
+                <p>{{ current_card.answer }}</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="session-actions">
+        <button id="knowIt">I knew this!</button>
+        <button id="forgotIt">I forgot this.</button>
+    </section>
+
+    <footer>
+        <a href="{% url 'dashboard' %}">End Session & Return to Dashboard</a>
+    </footer>
+</div>
+
+<script>
+    // Here's a basic idea of how you could handle the card reveal with plain JavaScript.
+    document.getElementById('revealAnswer').addEventListener('click', function() {
+        document.querySelector('.card-back').style.display = 'block';
+    });
+
+    // Similarly, you would add logic to handle when a user indicates they knew or forgot the card's answer.
+    // This logic would then decide which card to show next, based on the spaced repetition algorithm.
+</script>
+
+{% endblock %}

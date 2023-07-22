@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <header class="deck-header">
+        <h1>Deck: {{ deck.name }}</h1>
+        <a href="{% url 'add-card' deck.id %}" class="btn">Add New Flashcard</a>
+    </header>
+
+    <section class="deck-details">
+        <h2>Flashcards:</h2>
+        <ul class="flashcard-list">
+            {% for card in deck.cards.all %}
+            <li class="flashcard-item">
+                <p><strong>Question:</strong> {{ card.question }}</p>
+                <a href="{% url 'card-detail' card.id %}">View Details</a>
+            </li>
+            {% empty %}
+            <li>No flashcards in this deck yet.</li>
+            {% endfor %}
+        </ul>
+        
+        <a href="{% url 'study-deck' deck.id %}" class="btn">Study This Deck</a>
+    </section>
+
+    <footer>
+        <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+    </footer>
+</div>
+
+{% endblock %}
